@@ -10,7 +10,7 @@ import java.lang.Math; // Math.max(int,int)
 
 /**
  * @class Node
- * @brief classe noeud pour nos arbres
+ * classe noeud pour nos arbres
  */
 public class Node {
     private int  value;       // valeur stockée dans le noeud
@@ -47,31 +47,27 @@ public class Node {
     }// addSon()
 
     /**
-     * @param cpt : compteur pour la hauteur
      * @return (int) la hauteur du noeud
      * met à jour la hauteur de chaque noeud. A faire après insertion d'un noeud dans l'arbre
      */
-    int updateHeight(int cpt) {
+    int updateHeight() {
         // on parcours l'abre de manière récursive jusqu'aux feuilles en incrémentant un compteur à chaque fois que l'on
         // déscend sur un neoud fils. Si il n'y a plus de de fils g/d on renvoie la valeur du compteur qui est la hauteur
         // du noeud
         if(leftChild == null && rightChild == null) {
-            return cpt;
+            return 1;
         }
         // si il n'y pas de fils à gauche mais au moins un à droite
         else if(leftChild == null) {
-            cpt++;
-            return rightChild.updateHeight(cpt);
+            return rightChild.updateHeight() + 1;
         }
         // idem
         else if(rightChild == null) {
-            cpt++;
-            return leftChild.updateHeight(cpt);
+            return leftChild.updateHeight() + 1;
         }
         // si il y a un fils à gauche et à droite on récupère la hauteur maximale entre les 2 sous arbres
         else {
-            cpt++;
-            return Math.max(leftChild.updateHeight(cpt), rightChild.updateHeight(cpt));
+            return Math.max(leftChild.updateHeight(), rightChild.updateHeight()) + 1;
         }
     }// updateHeight()
 
@@ -92,6 +88,7 @@ public class Node {
     public int  getValue()      {return value;}
     public Node getLeftChild()  {return leftChild;}
     public Node getRightChild() {return rightChild;}
+    public int  getHeight()       {return height;}
 
     // setter
     // -------
