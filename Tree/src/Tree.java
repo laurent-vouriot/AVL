@@ -6,6 +6,7 @@
 
 // imports
 // -------
+import java.awt.desktop.SystemSleepEvent;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -26,29 +27,14 @@ public class Tree {
      * ajouter un noeud à l'arbre, si l'arbre est vide, le premier noeud ajouté devient la racine
      */
     public void add(Node node){
-        if(root == null) {
-            root = node;
+        if(getRoot() == null)
+            setRoot(node);
+        else {
+            updateRoot();
+            getRoot().addSon(node);
         }
-        else
-            root.addSon(node);
         pile.add(node);
     }// add()
-
-    //============================
-    // TODO : a suppr
-    //============================
-    /**
-     * actualise la hauteur de tous les noeuds  de l'arbre
-     */
-    private void updateAllHeights() {
-        for(Node node : pile) {
-            node.updateHeight();
-        }
-        /*for(Node node : pile) {
-            if(node.unbalanced())
-                System.out.println(node.getValue() + " Unbalanced");
-        }*/
-    }// updateAllHeights()
 
     /**
      * affichage de l'arbre
@@ -100,111 +86,52 @@ public class Tree {
             // on supprime le successeur
             node.setRightChild(remove(node.getRightChild(),succ.getValue()));
         }
+        node.updateHeight();
         return node;
     }// remove()
 
+    public void updateRoot(){
+        Node root = getRoot();
+        while(root.getFather() != null)
+            root = root.getFather();
+        setRoot(root);
+    }// updateRoot()
 
+    //------------------------------------------------------------------------------------------------------------------
+    // getter
+    //------------------------------------------------------------------------------------------------------------------
+    public Node getRoot() {return root;}
 
-    //================================================================================
-    // TODO : a suppr peut-être
-    //================================================================================
-    /**
-     * @param node
-     * renvoie la racine du sous-arbre déséquilibré
-     *//*
-    public Node isUnbalanced(Node node){
-        int leftChildHeight;
-        int rightChildHeight;
+    //------------------------------------------------------------------------------------------------------------------
+    // setter
+    //------------------------------------------------------------------------------------------------------------------
+    public void setRoot(Node node) {this.root = node;}
 
-        // si il n'y a pas  de fils gauche on
-        if(node.getLeftChild() == null)
-            leftChildHeight = 0;
-        else
-            leftChildHeight = node.getLeftChild().getHeight();
-
-        if(node.getRightChild() == null)
-            rightChildHeight = 0;
-        else
-            rightChildHeight = node.getRightChild().getHeight();
-
-        // si le noeud est déséquilibré on vérifie si ce déséquilibre ne provient d'un de ses sous-arbre
-        // si c'est le sous-arbre gauche
-        if (leftChildHeight > rightChildHeight) {
-            if (unbalanced(node.getLeftChild()))
-                isUnbalanced(node.getLeftChild());
-            return node.getLeftChild();
-        }
-        // sous arbre droit
-        else {
-            if (unbalanced(node.getRightChild()))
-                isUnbalanced(node.getRightChild());
-            return node.getRightChild();
-        }
-    }// isUnblanced()
-    */
-    /**
-     * @param : noeud du parcours
-     */ /*
-    public Node infix(Node node) {
-        if(node == null)
-            return null;
-        if(node.getLeftChild() != null) {
-            if(unbalanced(node.getLeftChild()))
-                return isUnbalanced(node.getLeftChild());
-            infix(node.getLeftChild());
-        }
-        if(node.getRightChild() != null) {
-            if (unbalanced(node.getRightChild()))
-                return isUnbalanced(node.getRightChild());
-            infix(node.getRightChild());
-        }
-        return null;
-    }// infix()
-*/
+    // DEBUG
     public static void main(String[] args) {
         Tree t1 = new Tree();
-        /* Node n1 = new Node(20);
-        Node n2 = new Node(10);
-        Node n3 = new Node(5);
-        Node n4 = new Node(37);
-        Node n5 = new Node(36);
-        Node n6 = new Node(40);
-        Node n7 = new Node(35);
-        Node n8 = new Node(9);
-        Node n9 = new Node(34);
+
+        Node n1 = new Node(50);
+        Node n2 = new Node(45);
+        Node n3 = new Node(40);
+        Node n4 = new Node(47);
+        Node n5 = new Node(60);
+        Node n6 = new Node(55);
+        Node n7 = new Node(65);
+        Node n8 = new Node(70);
 
         t1.add(n1);
         t1.add(n2);
         t1.add(n3);
         t1.add(n4);
         t1.add(n5);
-        t1.add(n6);
+        t1.add(n6);/*
         t1.add(n7);
-        t1.add(n8);
-        t1.add(n9);
-*/
+        t1.add(n8);*/
 
-        Node n1 = new Node(20);
-        Node n2 = new Node(30);
-        Node n3 = new Node(40);
-
-        t1.add(n1);
-        t1.add(n2);
-        t1.add(n3);
-
-        // t1.updateAllHeights();
-        /*t1.showTree();
-        System.out.println();
-        t1.updateAllHeights();
-
-        if(t1.unbalanced(n1))
-            System.out.println("ok");
-         else
-            System.out.println("ko");
-        //System.out.println(t1.isUnbalanced(n1).getValue());
-
-        System.out.println(t1.infix(n1).getValue());
-        */
+        t1.updateRoot();
+        System.out.println(t1.getRoot().getValue());
         t1.showTree();
+        //t1.showTree();
     }
 }
