@@ -119,18 +119,23 @@ public class Tree {
         Node n6 = new Node(55);
         Node n7 = new Node(65);
         Node n8 = new Node(70);
+        Node n9 = new Node(80);
 
         t1.add(n1);
         t1.add(n2);
         t1.add(n3);
         t1.add(n4);
         t1.add(n5);
-        t1.add(n6);/*
+        t1.add(n6);
         t1.add(n7);
-        t1.add(n8);*/
+        t1.add(n8);
+        t1.add(n9);
+
+//        for (int i = 0; i < 5; i++)
+//            t1.add(new Node(i + 1));
+
 
         t1.updateRoot();
-        System.out.println(t1.getRoot().getValue());
         t1.showTree();
         //t1.showTree();
     }
