@@ -112,11 +112,11 @@ public class Tree {
         Tree t1 = new Tree();
 
         Node n1 = new Node(50);
-        Node n2 = new Node(45);
-        Node n3 = new Node(40);
-        Node n4 = new Node(47);
-        Node n5 = new Node(60);
-        Node n6 = new Node(55);
+        Node n2 = new Node(17);
+        Node n3 = new Node(9);
+        Node n4 = new Node(14);
+        Node n5 = new Node(12);
+        Node n6 = new Node(76);
         Node n7 = new Node(65);
         Node n8 = new Node(70);
         Node n9 = new Node(80);
@@ -126,17 +126,14 @@ public class Tree {
         t1.add(n3);
         t1.add(n4);
         t1.add(n5);
-        t1.add(n6);
+        t1.add(n6);/*
         t1.add(n7);
         t1.add(n8);
-        t1.add(n9);
+        t1.add(n9);*/
 
 //        for (int i = 0; i < 5; i++)
 //            t1.add(new Node(i + 1));
 
-
-        t1.updateRoot();
         t1.showTree();
-        //t1.showTree();
     }
 }

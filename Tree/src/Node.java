@@ -132,8 +132,12 @@ public class Node {
         // on récupère la nouvelle racine
         Node newRoot = this.getLeftChild().getRightChild();
         //TODO : /!\
-        if(this.getFather() != null)
-            this.getFather().setRightChild(newRoot);
+        if(this.getFather() != null) {
+            if(this == this.getFather().getRightChild())
+                this.getFather().setRightChild(newRoot);
+            else
+                this.getFather().setLeftChild(newRoot);
+        }
         newRoot.setFather(this.getFather());
 
         // si la nouvelle racine a un fils droit
@@ -179,8 +183,12 @@ public class Node {
         // on récupère la nouvelle racine
         Node newRoot = getLeftChild();
         //TODO : /!\
-        if(this.getFather() != null)
-            this.getFather().setRightChild(newRoot);
+        if(this.getFather() != null) {
+            if(this == this.getFather().getRightChild())
+                this.getFather().setRightChild(newRoot);
+            else
+                this.getFather().setLeftChild(newRoot);
+        }
         newRoot.setFather(this.getFather());
 
         // si cette nouvelle racine a un fils droit
@@ -211,8 +219,12 @@ public class Node {
         System.out.println("rightExternal " + this.getValue());
         Node newRoot = this.getRightChild();
         //TODO : /!\
-        if(this.getFather() != null)
-            this.getFather().setRightChild(newRoot);
+        if(this.getFather() != null) {
+            if(this == this.getFather().getRightChild())
+                this.getFather().setRightChild(newRoot);
+            else
+                this.getFather().setLeftChild(newRoot);
+        }
         newRoot.setFather(this.getFather());
 
         if(newRoot.getLeftChild() != null) {
@@ -232,8 +244,12 @@ public class Node {
     void rightInternal() {
         Node newRoot = this.getRightChild().getLeftChild();
         //TODO : /!\
-        if(this.getFather() != null)
-            this.getFather().setRightChild(newRoot);
+        if(this.getFather() != null) {
+            if(this == this.getFather().getRightChild())
+                this.getFather().setRightChild(newRoot);
+            else
+                this.getFather().setLeftChild(newRoot);
+        }
         newRoot.setFather(this.getFather());
 
         if(newRoot.getLeftChild() != null) {
